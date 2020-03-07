@@ -46,7 +46,7 @@ metadata {
 	}
 
 	preferences {
-		input "ledIndicator", "enum", title: "LED Indicator", description: "Turn LED indicator... ", required: false, options:["on": "When On", "off": "When Off", "never": "Never"], defaultValue: "off"
+		input "ledIndicator", "enum", title: "LED Indicator", description: "Turn LED indicator on... ", required: false, options:["on": "When On", "off": "When Off", "never": "Never"], defaultValue: "off"
 	}
 
 	tiles(scale: 2) {
@@ -226,7 +226,6 @@ def setLevel(value) {
 	} else {
 		sendEvent(name: "switch", value: "off")
 	}
-	sendEvent(name: "level", value: level == 99 ? 100 : level)
 	delayBetween ([zwave.basicV1.basicSet(value: level).format(), zwave.switchMultilevelV1.switchMultilevelGet().format()], 5000)
 }
 
